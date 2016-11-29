@@ -1,0 +1,11 @@
+.block {
+    color: red;
+    height: 40px;
+    width: 40px;
+}
+
+.block-element {
+    color: green;
+    height: 20px;
+    width: 20px;
+}
