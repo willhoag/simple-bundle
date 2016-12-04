@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-../cli.js index.html -o dist
+../dist/bundle.js index.html -o dist
