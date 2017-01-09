@@ -7,6 +7,9 @@ If you use any of my packages, please star them on github. It’s a great way of
 
 Follow me on Twitter [@devhoag](http://twitter.com/devhoag)
 
+## PLEASE NOTE
+**This module is purely conceptual at the moment and may not work for your use case until the implementation can be improved.**
+
 ## Description
 **html -> concatinated, minified, cache-busted & pre-processed assets**
 

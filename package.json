@@ -1,7 +1,7 @@
 {
   "name": "simple-bundle",
   "description": "Bundle without a task manager",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "author": {
     "name": "Will Hoag",
     "email": "dev@willhoag.com",
