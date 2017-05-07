@@ -1,16 +1,15 @@
-import gulp from 'gulp'
-import rev from 'gulp-rev'
-import revReplace from 'gulp-rev-replace'
-import useref from 'gulp-useref'
-import filter from 'gulp-filter'
-import uglify from 'gulp-uglify'
-import csso from 'gulp-csso'
-import postcss from 'gulp-postcssrc'
-import babel from 'gulp-babel'
-import rollup from 'gulp-rollup-stream'
-import del from 'del'
-import RcFinder from 'rcfinder'
-
+const gulp = require('gulp')
+const rev = require('gulp-rev')
+const ref = require('gulp-ref')
+const revReplace = require('gulp-rev-replace')
+const filter = require('gulp-filter')
+const uglify = require('gulp-uglify')
+const csso = require('gulp-csso')
+const postcss = require('gulp-postcss')
+const babel = require('gulp-babel')
+const rollup = require('gulp-rollup-stream')
+const del = require('del')
+const RcFinder = require('rcfinder')
 
 const bundleConf = new RcFinder('rollup.config.js', {
   loader: function (path) {
@@ -18,37 +17,34 @@ const bundleConf = new RcFinder('rollup.config.js', {
   }
 }).find(process.cwd()) || { format: 'iife' }
 
-const jsFilter = filter("**/*.js", { restore: true })
-const cssFilter = filter("**/*.css", { restore: true })
+const jsFilter = filter('**/*.js', { restore: true })
+const cssFilter = filter('**/*.css', { restore: true })
 
-export default function bundle({src=['index.html'], dest='dist'}) {
+module.exports = function bundle ({src=['index.html'], dest='dist'}) {
 
   // coerce to array
   src = [].concat(src)
 
   // accomidates multiple source html files
-  const negatedSourceStrings = src.map(function (str) {
-    return '!' + str
-  })
-  const htmlFilter = filter(['**/*'].concat(negatedSourceStrings)
+  const srcFilter = filter(['**/*'].concat(src.map((str) => '!' + str))
     , { restore: true })
 
   return del(dest).then((paths) => {
     return new Promise((resolve, reject) => {
       gulp.src(src)
-        .pipe(useref())
+        .pipe(ref())
         .pipe(jsFilter)
-        .pipe(rollup(bundleConf))
-        .pipe(babel())
-        .pipe(uglify())
+          .pipe(rollup(bundleConf))
+          .pipe(babel())
+          .pipe(uglify())
         .pipe(jsFilter.restore)
         .pipe(cssFilter)
-        .pipe(postcss())
-        .pipe(csso())
+          .pipe(postcss())
+          .pipe(csso())
         .pipe(cssFilter.restore)
-        .pipe(htmlFilter)
-        .pipe(rev())
-        .pipe(htmlFilter.restore)
+        .pipe(srcFilter)
+          .pipe(rev())
+        .pipe(srcFilter.restore)
         .pipe(revReplace())
         .on('error', reject)
         .pipe(gulp.dest(dest))

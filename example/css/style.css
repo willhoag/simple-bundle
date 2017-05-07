@@ -1,2 +1,4 @@
-body { color: blue; }
-@import './block.css'
+@import 'block';
+a { color: red; }
+body { background: hsl(90deg 90% 70%); }
+

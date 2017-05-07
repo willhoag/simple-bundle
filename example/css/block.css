@@ -5,6 +5,7 @@
 }
 
 .block-element {
+    background: url('../images/cat.jpg');
     color: green;
     height: 20px;
     width: 20px;

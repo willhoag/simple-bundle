@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 
-import fs from 'fs'
-import program from 'commander'
-import elegantSpinner from 'elegant-spinner'
-import logUpdate from 'log-update'
-import bundle from './'
-import info from '../package.json'
+const fs = require('fs')
+const program = require('commander')
+const elegantSpinner = require('elegant-spinner')
+const logUpdate = require('log-update')
+const bundle = require('./')
+const info = require('../package.json')
 
 program
   .version(info.version)

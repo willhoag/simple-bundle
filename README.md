@@ -1,5 +1,5 @@
 # simple-bundle
-Bundle without a task manager
+Bundle assets without a task manager. HTML -> BUNDLE
 
 [![npm version](https://badge.fury.io/js/simple-bundle.svg)](https://badge.fury.io/js/simple-bundle)
 
@@ -7,44 +7,30 @@ If you use any of my packages, please star them on github. It’s a great way of
 
 Follow me on Twitter [@devhoag](http://twitter.com/devhoag)
 
-## PLEASE NOTE
-**This module is purely conceptual at the moment and may not work for your use case until the implementation can be improved.**
-
 ## Description
-**html -> concatinated, minified, cache-busted & pre-processed assets**
+**html -> dest / pre-processed, minified & cache-busted**
 
-Input html with useref blocks and output concatinated, minified, cache-busted, and pre/post processed asset
+Input html and output pre-processed, minified and cache-busted asset
 bundle without a task manager.
 
-Use **.babelrc** and **.postcssrc** to configure processing your javascript
-and styles. Perfect for your npm scripts.
+Use **.babelrc** and **postcss.config.js** to configure processing your javascript
+and styles.
 
 
 ## Example
 ```bash
-bundle index.html --output=dist
+bundle index.html -o dist
+
 tree dist
 # dist
-# ├── combined-43fd1cd487.js
-# ├── combined-be04798bc0.css
+# ├── index-43fd1cd487.js
+# ├── style-be04798bc0.css
 # └── index.html
 ```
 
 ## Usage
 
-#### Install processing dependencies
-```bash
-
-# for instance
-npm install --save-dev \
-  babel-plugin-transform-runtime \
-  babel-preset-es2015 \
-  postcss-cssnext \
-  postcss-partial-import
-
-```
-
-Then setup **.babelrc** and **.postcssrc** files in your project to customize processing assets
+### Make **.babelrc** and **postcss.config.js** files in your project to customize processing assets
 #### .babelrc
 ```json
 {
@@ -53,33 +39,30 @@ Then setup **.babelrc** and **.postcssrc** files in your project to customize pr
 }
 ```
 
-#### .postcssrc
-```json
-{
-  "plugins": {
-    "postcss-cssnext": {},
-    "postcss-partial-import": {}
-  }
+#### postcss.config.js
+```js
+module.exports = {
+  plugins: [
+    require('postcss-import'),
+    require('postcss-cssnext')
+  ]
 }
 ```
 
-Make some useref blocks in your **html**
-
-#### index.html
-```html
-<!-- build:css css/combined.css -->
-<link href="reset.css" rel="stylesheet" type="text/css" charset="utf-8">
-<link href="style.css" rel="stylesheet" type="text/css" charset="utf-8">
-<!-- endbuild -->
-
-<!-- build:js/combined.js -->
-<script src="index.js" type="text/javascript" charset="utf-8"></script>
-<!-- endbuild -->
+### Install used dependencies
+```bash
+yarn add --save-dev \
+  babel-plugin-transform-runtime \
+  babel-preset-es2015 \
+  postcss-import \
+  postcss-cssnext
 ```
+
 
 ### npm run / CLI
 ```bash
 bundle index.html other.html -o dist
+
 tree dist
 # dist
 # ├── combined-43fd1cd487.js
