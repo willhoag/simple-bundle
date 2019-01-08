@@ -3,9 +3,8 @@ Bundle assets without a task manager. HTML -> BUNDLE
 
 [![npm version](https://badge.fury.io/js/simple-bundle.svg)](https://badge.fury.io/js/simple-bundle)
 
-If you use any of my packages, please star them on github. It’s a great way of getting feedback and gives me the kick to put more time into their development. If you encounter any bugs or have feature requests, just open an issue report on Github.
-
-Follow me on Twitter [@devhoag](http://twitter.com/devhoag)
+DON'T USE THIS: This was just a light experiment to test an idea which has been
+made obsolete by [Parcel](https://parceljs.org). Please use that instead.
 
 ## Description
 **html -> dest / pre-processed, minified & cache-busted**
